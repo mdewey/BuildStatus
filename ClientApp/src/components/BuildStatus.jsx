@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import {buildStatusLoaded} from '../actions'
 import { useCommitContext } from "../useCommitContext";
 
 const BuildStatus = () => {
@@ -13,7 +13,7 @@ const BuildStatus = () => {
       console.log({ resp });
       const { data } = resp;
       const { staging, production } = data;
-      dispatch({ type: "BUILD_LOADED", value: { staging, production } });
+      dispatch(buildStatusLoaded({staging, production}));
       setStaging(staging);
       setProduction(production);
     });
