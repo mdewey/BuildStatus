@@ -7,6 +7,16 @@ import Commit from "./Commit";
 
 const CommitHistory = () => {
   const { state, dispatch } = useCommitContext();
+  console.log({state});
+  let productionSha;
+  let stagingSha;
+  
+
+  if (state.statues){
+    console.log('in if', {state});
+    productionSha = state.statues.production.commit
+    stagingSha = state.statues.staging.commit
+  }
   
   const [commits, setCommits] = useState([]);
   useEffect(() => {
@@ -15,12 +25,13 @@ const CommitHistory = () => {
     })
     
   }, []);
+  console.log({productionSha});
   return (
     <div>
       <header>latest {commits.length} commits</header>
       <ul>
         {commits.map((commit, index) => {
-          return <Commit data={commit} key={index}/>
+          return <Commit data={commit} key={index} productionSha={productionSha} stagingSha={stagingSha} />
         })}
         </ul>  
     </div>
