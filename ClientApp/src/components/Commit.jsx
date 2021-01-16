@@ -23,20 +23,16 @@ const Commit = ({data, flags}) => {
     }
     return `commit ${css}`
   }
+  const Message = commitMessage => {
+    console.log({commitMessage});
+    const {message} = commitMessage
+    return <p>{message.substring(0, 25)} {message.length > 25 ? "..." : ''}</p>
+  }
   return (
     <li className={getCSSClass(flags)}>
-      <section className="sha">
-        <label>sha</label>
         <p>{sha}</p>
-      </section>
-      {/* <section className="message">
-        <label>message</label>
-        <p>{message}</p>
-      </section> */}
-      <section className="author">
-        <label>who</label>
+        <Message message={message} />
         <p>{author.name} | {userName}</p>
-      </section>
       {isProductionCommit && (
         <p>PRODUCTION</p>
       )}

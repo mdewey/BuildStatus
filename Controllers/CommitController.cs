@@ -19,9 +19,21 @@ namespace BuildStatus.Controllers
     {
       //   var response = await client.GetAsync($"https://api.github.com/repos/{owner}/{repo}/commits");
       client.DefaultRequestHeaders.Add("User-Agent", "Build-Status-Dashboard");
+      // client.DefaultRequestHeaders.Authorization.Parameter;
       var response = await client.GetAsync($"https://api.github.com/repos/department-of-veterans-affairs/vets-website/commits");
       //   response.EnsureSuccessStatusCode();
       string jsonString = await response.Content.ReadAsStringAsync();
+      // Console.WriteLine(jsonString);
+      foreach (var header in response.Headers)
+      {
+        Console.WriteLine($"{header.Key} = {header.Value}");
+        foreach (var value in header.Value)
+        {
+          Console.WriteLine($"{value}");
+        }
+      }
+
+
       var commits = JsonSerializer.Deserialize<List<Models.Root>>(jsonString);
 
       // Above three lines can be replaced with new helper method below
