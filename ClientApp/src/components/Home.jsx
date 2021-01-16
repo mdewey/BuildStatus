@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BuildStatus from "./BuildStatus";
+import CommitFinder from "./CommitFinder";
 import CommitHistory from "./CommitHistory";
 
 export class Home extends Component {
@@ -10,6 +11,7 @@ export class Home extends Component {
       <div>
         <h1>Is your commit deployed?</h1>
         <BuildStatus />
+        <CommitFinder/>
         <CommitHistory/>
       </div>
     );

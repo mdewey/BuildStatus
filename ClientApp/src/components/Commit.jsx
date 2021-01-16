@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Commit = ({data, flags}) => {
-  console.log(flags);
   const {sha, commit} = data 
   const {author, message} = commit
   const userName = data.author.login
@@ -24,7 +23,6 @@ const Commit = ({data, flags}) => {
     return `commit ${css}`
   }
   const Message = commitMessage => {
-    console.log({commitMessage});
     const {message} = commitMessage
     const numberToTake = 50
     return <p className="message">{message.substring(0, numberToTake)} {message.length > numberToTake ? "..." : ''}</p>

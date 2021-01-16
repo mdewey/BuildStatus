@@ -47,6 +47,7 @@ namespace BuildStatus.Controllers
     }
 
     [HttpGet]
+    [ResponseCache(Duration = 3600)]
     public async Task<ActionResult> GetBuildStatusAsync()
     {
       var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "vets-website");

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace BuildStatus
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddResponseCaching();
 
       services.AddControllersWithViews();
 
@@ -51,7 +53,20 @@ namespace BuildStatus
       app.UseSpaStaticFiles();
 
       app.UseRouting();
+      app.UseResponseCaching();
+      app.Use(async (context, next) =>
+      {
+        context.Response.GetTypedHeaders().CacheControl =
+      new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+      {
+        Public = true,
+        MaxAge = TimeSpan.FromHours(1)
+      };
+        context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+      new string[] { "Accept-Encoding" };
 
+        await next();
+      });
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllerRoute(
