@@ -22,10 +22,26 @@ ul, li {
 
 .commit {
   border: 1px solid pink;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+}
+
+.commit .data {
+  display: grid;
+  width: 75%;
+  grid-template-columns: 50% auto;
+  grid-template-rows: 50% 50%;
+}
+
+.message {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.small-text {
+  font-size: 0.8rem;
 }
 
 .commit.on-production {
