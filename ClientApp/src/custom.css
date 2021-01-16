@@ -1,4 +1,5 @@
 /* Provide sufficient contrast against white background */
+
 a {
   color: #0366d6;
 }
@@ -11,4 +12,38 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+.commit {
+  border: 1px solid pink;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.commit.on-production {
+  background-color: green;
+  color: white;
+}
+
+.commit.is-production {
+  background-color: green;
+  color: white;
+  border: 5px yellow dotted;
+}
+
+.commit.is-staging {
+  background-color: blue;
+  color: white;
+  border: 5px orange dotted;
+}
+
+.commit.on-staging {
+  background-color: blue;
+  color: white;
 }

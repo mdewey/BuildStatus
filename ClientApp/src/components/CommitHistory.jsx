@@ -26,12 +26,23 @@ const CommitHistory = () => {
     
   }, []);
   console.log({productionSha});
+  let hasStagingBeenFound = false;
+  let hasProductionBeenFound = false; 
+
   return (
     <div>
       <header>latest {commits.length} commits</header>
       <ul>
         {commits.map((commit, index) => {
-          return <Commit data={commit} key={index} productionSha={productionSha} stagingSha={stagingSha} />
+          const isStaging = commit.sha === stagingSha;
+          const isProduction = commit.sha === productionSha;
+          if (isStaging){
+            hasStagingBeenFound = true;
+          }
+          if (isProduction){
+            hasProductionBeenFound = true;
+          }
+          return <Commit data={commit} key={index} flags={{hasStagingBeenFound, hasProductionBeenFound, isStaging, isProduction}}/>
         })}
         </ul>  
     </div>
