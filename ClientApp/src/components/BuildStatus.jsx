@@ -10,7 +10,6 @@ const BuildStatus = () => {
 
   useEffect(() => {
     axios.get("/api/build").then((resp) => {
-      console.log({ resp });
       const { data } = resp;
       const { staging, production } = data;
       dispatch(buildStatusLoaded({staging, production}));

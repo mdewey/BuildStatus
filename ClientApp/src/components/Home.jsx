@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BuildStatus from "./BuildStatus";
+import CommitHistory from "./CommitHistory";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -9,6 +10,7 @@ export class Home extends Component {
       <div>
         <h1>Is your commit deployed?</h1>
         <BuildStatus />
+        <CommitHistory/>
       </div>
     );
   }
