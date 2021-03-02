@@ -32,7 +32,12 @@ const Commit = ({data, flags}) => {
       <section className="data">
         <Message message={message} />
         <p className="small-text">{author.name} | {userName}</p>
-        <p className="small-text">{sha}</p>
+        <p className="small-text">
+          <a href={`https://github.com/department-of-veterans-affairs/vets-website/commit/${sha}`}
+          target="_blank">
+            {sha}
+          </a>
+        </p>
       </section>
       {isProductionCommit && (
         <p>PRODUCTION</p>
