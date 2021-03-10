@@ -1,5 +1,9 @@
 /* Provide sufficient contrast against white background */
 
+body{
+  background-color: whitesmoke;
+}
+
 a {
   color: #0366d6;
 }
@@ -26,27 +30,45 @@ ul, li {
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  border-radius: 0.25rem;
 }
+
+.commit::after{
+  content: "in master";
+  font-size: 0.75rem;
+  color:darkslategrey;
+}
+
+.commit.is-staging::after{
+  content: '';
+}
+
+.commit.on-staging::after{
+  content: 'in staging';
+}
+
+.commit.is-production::after{
+  content: '';
+}
+
+.commit.on-production::after{
+  content: 'in production';
+}
+
+
 
 .commit .data {
   display: grid;
-  width: 75%;
-  grid-template-columns: 50% auto;
+  width: 80%;
+  grid-template-columns: 30% auto;
   grid-template-rows: 50% 50%;
-}
-
-.message {
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.small-text {
-  font-size: 0.8rem;
 }
 
 .commit.on-production {
   background-color: green;
   color: white;
+  border: none;
 }
 
 .commit.is-production {
@@ -63,5 +85,59 @@ ul, li {
 
 .commit.on-staging {
   background-color: blue;
-  color: white;
+  color: white; 
+  border: none;
+
 }
+
+.commit.is-production .sha a,
+.commit.is-staging .sha a,
+.commit.on-production .sha a,
+.commit.on-staging .sha a{
+  color:lightblue;
+}
+
+.message {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.small-text {
+  font-size: 0.8rem;
+}
+.smaller-text {
+  font-size: 0.7rem;
+}
+.github-image{
+  width: 2rem;
+  border-radius: 5rem;
+  margin: 0.40rem;
+}
+
+.user{
+  background-color: #d4d8db;
+  border-radius: 5rem;
+}
+
+.user a {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.user, .sha {
+  display: flex;
+  align-items: center;
+}
+
+.sha{
+  flex-direction: column;
+}
+
+.right-align{
+  text-align: right;
+}
+

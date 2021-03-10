@@ -3,6 +3,8 @@ import React from 'react';
 const Commit = ({data, flags}) => {
   const {sha, commit} = data 
   const {author, message} = commit
+  const when = new Date(commit.author.date)
+  console.log(commit);
   const userName = data.author.login
   const isProductionCommit = flags.isProduction;
   const isStagingCommit = flags.isStaging;
@@ -31,13 +33,22 @@ const Commit = ({data, flags}) => {
     <li className={getCSSClass(flags)}>
       <section className="data">
         <Message message={message} />
-        <p className="small-text">{author.name} | {userName}</p>
-        <p className="small-text">
-          <a href={`https://github.com/department-of-veterans-affairs/vets-website/commit/${sha}`}
-          target="_blank">
-            {sha}
+        
+        <div className="small-text user">
+          <a href={`https://www.github.com/${userName}`} target="_blank">
+              <img className="github-image" src={`https://www.github.com/${userName}.png`} alt=""/>
+              {author.name}
           </a>
-        </p>
+        </div>  
+        <div className="small-text sha">
+          <div>
+            <a href={`https://github.com/department-of-veterans-affairs/vets-website/commit/${sha}`}
+              target="_blank">
+              {sha}
+            </a>
+          </div>
+          <p className="smaller-text">merged at {when.toLocaleString()}</p>
+        </div>
       </section>
       {isProductionCommit && (
         <p>PRODUCTION</p>

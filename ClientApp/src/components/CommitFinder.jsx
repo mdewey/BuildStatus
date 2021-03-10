@@ -10,10 +10,8 @@ const CommitFinder = () => {
   const [needle, setNeedle] = useState();
   const [matchingCommits, setMatchingCommits] = useState([]);
   useEffect(() => {
-    console.log({needle});
     if (needle){
       const results = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha.startsWith(needle))
-      console.log({results});
       setMatchingCommits(results)
     } else {
       setMatchingCommits([])
@@ -26,12 +24,9 @@ const CommitFinder = () => {
       const production = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statues.production.commit)[0]
       const staging = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statues.staging.commit)[0]
 
-      console.log('building cache', {production});
       if (production){
-        console.log({production});
         setProductionIndex(production.index);
       }
-      console.log('building cache', {staging});
       if (staging){
         console.log({staging});
         setStagingIndex(staging.index);
