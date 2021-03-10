@@ -36,8 +36,6 @@ namespace BuildStatus.Controllers
 
       var commits = JsonSerializer.Deserialize<List<Models.Root>>(jsonString);
 
-      // Above three lines can be replaced with new helper method below
-      // string responseBody = await client.GetStringAsync(uri);
 
       //   var split = responseBody.Trim().Split('\n');
       //   var refString = split.First(f => f.Contains("REF="));
