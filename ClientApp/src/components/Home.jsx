@@ -9,7 +9,6 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Is your commit deployed?</h1>
         <BuildStatus />
         <CommitFinder/>
         <CommitHistory/>

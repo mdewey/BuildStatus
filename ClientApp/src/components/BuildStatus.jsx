@@ -19,13 +19,17 @@ const BuildStatus = () => {
   }, []);
   return (
     <>
-      <div>
-        <h1>staging</h1>
-        <p>current commit:{staging.commit} </p>
-      </div>
-      <div>
-        <h1>production</h1>
-        <p>current commit:{production.commit} </p>
+      <h1 className="build-status">Build Status</h1>
+      <div className="environments small-text">
+        <div className="status">
+          <p className="name"><a target="_blank" href="https://staging.va.gov/BUILD.txt">staging</a></p>
+          <p>{staging.commit} </p>
+        </div>
+        <div className="status">
+        <p className="name"><a target="_blank" href="https://va.gov/BUILD.txt">production</a></p>
+
+          <p>{production.commit} </p>
+        </div>
       </div>
     </>
   );
