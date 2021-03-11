@@ -56,19 +56,27 @@ ul, li {
 }
 
 .commit.is-staging::after{
-  content: '';
+  content: 'currently staging';
+  color:white;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .commit.on-staging::after{
   content: 'in staging';
+  color:lightgray;
 }
 
 .commit.is-production::after{
-  content: '';
+  content: 'currently production';
+  color:white;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .commit.on-production::after{
   content: 'in production';
+  color:lightgray;
 }
 
 
@@ -76,7 +84,7 @@ ul, li {
 .commit .data {
   display: grid;
   width: 80%;
-  grid-template-columns: 30% auto;
+  grid-template-columns: 20% auto;
   grid-template-rows: 50% 50%;
 }
 

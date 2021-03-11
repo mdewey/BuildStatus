@@ -50,12 +50,12 @@ const Commit = ({data, flags}) => {
           <p className="smaller-text">merged at {when.toLocaleString()}</p>
         </div>
       </section>
-      {isProductionCommit && (
+      {/* {isProductionCommit && (
         <p>PRODUCTION</p>
       )}
        {isStagingCommit && (
         <p>STAGING</p>
-      )}
+      )} */}
     </li>
   )
 }
