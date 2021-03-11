@@ -1,10 +1,10 @@
 /* Provide sufficient contrast against white background */
 
-:root{
+:root {
   font-size: 18px;
 }
 
-body{
+body {
   background-color: whitesmoke;
 }
 
@@ -28,31 +28,31 @@ ul, li {
   padding: 0
 }
 
-.build-status{
-  color:rgb(56, 56, 56);
+.build-status {
+  color: rgb(56, 56, 56);
   font-size: 1.5rem;
 }
-.environments{
+
+.environments {
   display: flex;
   justify-content: space-around;
-  
 }
-.environments .status{
+
+.environments .status {
   background-color: white;
-  margin:0.5rem;
+  margin: 0.5rem;
   padding: 0.5rem;
   border: 1px grey solid;
 }
 
-
-.commits-container{
-  display:flex;
+.commits-container {
+  display: flex;
   flex-direction: column;
 }
-.commits-container header{
+
+.commits-container header {
   align-self: flex-end;
   font-size: 0.9rem;
-
 }
 
 .commit {
@@ -65,34 +65,34 @@ ul, li {
   border-radius: 0.25rem;
 }
 
-.commit::after{
-  content: "in master";
+.commit::after {
+  content: "in master, not deployed";
   font-size: 0.75rem;
-  color:darkslategrey;
+  color: darkslategrey;
 }
 
-.commit.is-staging::after{
+.commit.is-staging::after {
   content: 'currently staging';
-  color:white;
+  color: white;
   font-size: 1rem;
   text-transform: uppercase;
 }
 
-.commit.on-staging::after{
+.commit.on-staging::after {
   content: 'in staging';
-  color:lightgray;
+  color: lightgray;
 }
 
-.commit.is-production::after{
+.commit.is-production::after {
   content: 'is production';
-  color:white;
+  color: white;
   font-size: 1rem;
   text-transform: uppercase;
 }
 
-.commit.on-production::after{
+.commit.on-production::after {
   content: 'in production';
-  color:lightgray;
+  color: lightgray;
 }
 
 .commit .data {
@@ -122,16 +122,12 @@ ul, li {
 
 .commit.on-staging {
   background-color: blue;
-  color: white; 
+  color: white;
   border: none;
-
 }
 
-.commit.is-production .sha a,
-.commit.is-staging .sha a,
-.commit.on-production .sha a,
-.commit.on-staging .sha a{
-  color:lightblue;
+.commit.is-production .sha a, .commit.is-staging .sha a, .commit.on-production .sha a, .commit.on-staging .sha a {
+  color: lightblue;
 }
 
 .message {
@@ -142,16 +138,18 @@ ul, li {
 .small-text {
   font-size: 0.8rem;
 }
+
 .smaller-text {
   font-size: 0.7rem;
 }
-.github-image{
+
+.github-image {
   width: 2rem;
   border-radius: 5rem;
   margin: 0.40rem;
 }
 
-.user{
+.user {
   background-color: #d4d8db;
   border-radius: 5rem;
 }
@@ -163,45 +161,40 @@ ul, li {
   text-overflow: ellipsis;
 }
 
-
-
 .user, .sha {
   display: flex;
   align-items: center;
 }
 
-.sha{
+.sha {
   flex-direction: column;
 }
 
-.right-align{
+.right-align {
   text-align: right;
 }
 
-.search-result{
+.search-result {
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:0.5rem;
-  margin:0.25rem;
+  padding: 0.5rem;
+  margin: 0.25rem;
   border: 1px darkgray solid;
   border-radius: 0.25rem;
-
 }
 
-.search-result .on-staging{
+.search-result .on-staging {
   background-color: blue;
   color: white;
   padding: 0.35rem;
   border-radius: 5rem;
-
-  
 }
-.search-result .on-production{
+
+.search-result .on-production {
   background-color: green;
   color: white;
   padding: 0.35rem;
   border-radius: 5rem;
-
 }
