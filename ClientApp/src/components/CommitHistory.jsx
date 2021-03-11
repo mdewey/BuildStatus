@@ -27,7 +27,7 @@ const CommitHistory = () => {
   let hasProductionBeenFound = false; 
 
   return (
-    <div>
+    <div className="commits-container">
       <header>latest {commits.length} commits</header>
       <ul>
         {commits.map((commit, index) => {
