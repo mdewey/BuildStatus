@@ -27,7 +27,7 @@ namespace BuildStatus.Controllers
       var split = responseBody.Trim().Split('\n');
       var refString = split.First(f => f.Contains("REF="));
       var commit = refString.Split("=").Last();
-      var data = new { commit, staging = split, raw = responseBody, refString };
+      var data = new { commit, data = split, raw = responseBody, refString };
       return data;
     }
 

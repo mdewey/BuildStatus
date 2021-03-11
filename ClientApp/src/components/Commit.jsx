@@ -4,7 +4,7 @@ const Commit = ({data, flags}) => {
   const {sha, commit} = data 
   const {author, message} = commit
   const when = new Date(commit.author.date)
-  console.log(commit);
+
   const userName = data.author.login
   const isProductionCommit = flags.isProduction;
   const isStagingCommit = flags.isStaging;
