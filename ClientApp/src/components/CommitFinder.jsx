@@ -7,7 +7,7 @@ const CommitFinder = () => {
   const {commits, statues} = state
   const [productionIndex, setProductionIndex] = useState();
   const [stagingIndex, setStagingIndex] = useState();
-  const [needle, setNeedle] = useState();
+  const [needle, setNeedle] = useState("");
   const [matchingCommits, setMatchingCommits] = useState([]);
   useEffect(() => {
     if (needle){
@@ -42,31 +42,31 @@ const CommitFinder = () => {
     if (commit.index < stagingIndex && commit.index < productionIndex){
       return <p>not deployed</p>
     } if (commit.index >= stagingIndex && commit.index < productionIndex){
-      return <p>in staging</p>
+      return <p className="on-staging">in staging</p>
     }  if (commit.index >= productionIndex){
-      return <p>in production</p>
+      return <p className="on-production">in production</p>
     }else {
       return <p>unknown</p>
     }
   }
   return (
     <div>
-      Search : <input type="search" onChange={e => setNeedle(e.target.value)}/>
-      
-        <section>
-          <header>commits found</header>
+      <hr/>
+      Search : <input type="search" onChange={e => setNeedle(e.target.value)} value={needle}/>
+      <button onClick={() => setNeedle("")}>clear results</button>
+       {matchingCommits.length > 0 && <section>
+          <em>results</em>
           <ul>
             {matchingCommits.map(commit => {
-              return <li>
+              return <li className="search-result">
                 <p>{commit.sha}</p>
                 <DeploymentStatus commit={commit}/>
               </li>
             })}
           </ul>
-        </section>
-      
-      {/* <p>production is at {productionIndex}</p>
-      <p>staging is at {stagingIndex}</p> */}
+      </section>}
+      {(matchingCommits.length === 0 && needle.length > 0) && <em>no commits found</em>}
+      <hr/>
     </div>
   );
 }

@@ -178,3 +178,30 @@ ul, li {
   text-align: right;
 }
 
+.search-result{
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0.5rem;
+  margin:0.25rem;
+  border: 1px darkgray solid;
+  border-radius: 0.25rem;
+
+}
+
+.search-result .on-staging{
+  background-color: blue;
+  color: white;
+  padding: 0.35rem;
+  border-radius: 5rem;
+
+  
+}
+.search-result .on-production{
+  background-color: green;
+  color: white;
+  padding: 0.35rem;
+  border-radius: 5rem;
+
+}
