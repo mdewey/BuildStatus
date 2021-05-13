@@ -33,7 +33,7 @@ const BuildStatus = (props) => {
 
   return (
     <>
-      <h1 className="build-status">Build Status</h1>
+      <h1 className="build-status">{projectKey} Build Status</h1>
       <div className="environments small-text">
         <div className="status">
           <p className="name"><a target="_blank" rel="noopener noreferrer" href={staging.url}>staging</a></p>

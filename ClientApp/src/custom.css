@@ -37,6 +37,7 @@ ul, li {
 }
 
 .build-status {
+  text-transform: capitalize;
   color: rgb(56, 56, 56);
   font-size: 1.5rem;
 }

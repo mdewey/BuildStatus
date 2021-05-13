@@ -8,7 +8,7 @@ const ProjectStatus = (props) => {
   return (
     <section>
       <BuildStatus projectKey={projectKey}/>
-      {/* <CommitFinder projectKey={projectKey}/>*/}
+      <CommitFinder projectKey={projectKey}/>
       <CommitHistory projectKey={projectKey}/> 
     </section>
   );
