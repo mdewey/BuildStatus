@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useCommitContext } from "../useCommitContext";
 
-const CommitFinder = () => {
-  const { state, dispatch } = useCommitContext();
+const CommitFinder = (props) => {
+  const { projectKey } = props
+
+  const { state } = useCommitContext();
   const [results, setResults] = useState();
-  const {commits, statuses} = state
+  const {commits, statuses} = state[projectKey] || {}
+  
   const [productionIndex, setProductionIndex] = useState();
   const [stagingIndex, setStagingIndex] = useState();
   const [needle, setNeedle] = useState("");

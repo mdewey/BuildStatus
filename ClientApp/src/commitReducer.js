@@ -4,9 +4,9 @@ import { BUILD_STATUS_LOADED, COMMITS_LOADED } from './actions'
 const reducerFunction = (state, action) => {
   switch (action.type) {
     case BUILD_STATUS_LOADED:
-      return { ...state, [action.projectKey]: action.statuses }
+      return { ...state, [action.projectKey]: { statuses: action.statuses, ...state[action.projectKey] } }
     case COMMITS_LOADED:
-      return { ...state, commits: action.commits }
+      return { ...state, [action.projectKey]: { commits: action.commits, ...state[action.projectKey] } }
     default:
 
       return { ...state }

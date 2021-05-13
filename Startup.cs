@@ -60,7 +60,7 @@ namespace BuildStatus
       new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
       {
         Public = true,
-        MaxAge = TimeSpan.FromMinutes(1)
+        MaxAge = TimeSpan.FromHours(1)
       };
         context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
       new string[] { "Accept-Encoding" };

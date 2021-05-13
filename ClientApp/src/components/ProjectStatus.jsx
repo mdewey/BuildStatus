@@ -8,8 +8,8 @@ const ProjectStatus = (props) => {
   return (
     <section>
       <BuildStatus projectKey={projectKey}/>
-      <CommitFinder/>
-      <CommitHistory/>
+      {/* <CommitFinder projectKey={projectKey}/>*/}
+      <CommitHistory projectKey={projectKey}/> 
     </section>
   );
 }

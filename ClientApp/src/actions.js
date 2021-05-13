@@ -11,6 +11,6 @@ export const buildStatusLoaded = (projectKey, statuses) => {
 export const COMMITS_LOADED =
   'COMMITS_LOADED';
 
-export const commitsLoaded = (commits) => {
-  return { type: COMMITS_LOADED, commits };
+export const commitsLoaded = (projectKey, commits) => {
+  return { type: COMMITS_LOADED, projectKey, commits };
 };

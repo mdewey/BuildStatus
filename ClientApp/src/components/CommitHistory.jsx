@@ -5,21 +5,22 @@ import { useCommitContext } from "../useCommitContext";
 import Commit from "./Commit";
 
 
-const CommitHistory = () => {
+const CommitHistory = (props) => {
+  const { projectKey } = props
   const { state, dispatch } = useCommitContext();
   let productionSha;
   let stagingSha;
 
-  if (state.statuses){
-    productionSha = state.statuses.production.commit
-    stagingSha = state.statuses.staging.commit
+  if (state[projectKey]?.statuses){
+    productionSha = state[projectKey].production?.commit
+    stagingSha = state[projectKey].staging?.commit
   }
   
   const [commits, setCommits] = useState([]);
   useEffect(() => {
-    axios.get('/api/commit').then(resp => {
+    axios.get(`/api/commit/${projectKey}`).then(resp => {
       setCommits(resp.data.commits)
-      dispatch(commitsLoaded(resp.data.commits))
+      dispatch(commitsLoaded(projectKey, resp.data.commits))
     })
     
   }, []);

@@ -22,22 +22,30 @@ namespace BuildStatus.Controllers
       // Console.WriteLine(url);
       var response = await client.GetAsync(url);
       string jsonString = await response.Content.ReadAsStringAsync();
-      // foreach (var header in response.Headers)
-      // {
-      //   // Console.WriteLine($"{header.Key} = {header.Value}");
-      //   foreach (var value in header.Value)
-      //   {
-      //     Console.WriteLine($"{value}");
-      //   }
-      // }
+      foreach (var header in response.Headers)
+      {
+        Console.WriteLine($"{header.Key} = {header.Value}");
+        foreach (var value in header.Value)
+        {
+          Console.WriteLine($"{value}");
+        }
+      }
       var commits = JsonSerializer.Deserialize<List<Models.Root>>(jsonString);
       return commits;
     }
 
-    [HttpGet]
-    public async Task<ActionResult> GetBuildStatusAsync([FromQuery] int perPage = 30)
+    [HttpGet("website")]
+    [ResponseCache(Duration = 36000)]
+    public async Task<ActionResult> GetWebsiteBuildStatusAsync([FromQuery] int perPage = 30)
     {
       var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "vets-website", perPage);
+      return Ok(new { commits });
+    }
+    [HttpGet("content")]
+    [ResponseCache(Duration = 36000)]
+    public async Task<ActionResult> GetContentBuildStatusAsync([FromQuery] int perPage = 30)
+    {
+      var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "content-build", perPage);
       return Ok(new { commits });
     }
   }
