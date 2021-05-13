@@ -12,8 +12,8 @@ const CommitHistory = (props) => {
   let stagingSha;
 
   if (state[projectKey]?.statuses){
-    productionSha = state[projectKey].production?.commit
-    stagingSha = state[projectKey].staging?.commit
+    productionSha = state[projectKey].statuses?.production?.commit
+    stagingSha = state[projectKey].statuses?.staging?.commit
   }
   
   const [commits, setCommits] = useState([]);
