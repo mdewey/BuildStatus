@@ -36,14 +36,12 @@ namespace BuildStatus.Controllers
     }
 
     [HttpGet("website")]
-    [ResponseCache(Duration = 36000)]
     public async Task<ActionResult> GetWebsiteBuildStatusAsync([FromQuery] int perPage = 50)
     {
       var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "vets-website", perPage);
       return Ok(new { commits });
     }
     [HttpGet("content")]
-    [ResponseCache(Duration = 36000)]
     public async Task<ActionResult> GetContentBuildStatusAsync([FromQuery] int perPage = 50)
     {
       var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "content-build", perPage);
