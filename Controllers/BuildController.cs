@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace BuildStatus.Controllers
 {
@@ -13,16 +13,28 @@ namespace BuildStatus.Controllers
   public class BuildController : ControllerBase
   {
 
-    static readonly HttpClient client = new HttpClient();
+    static HttpClient client;
 
 
+    public IConfiguration Configuration { get; }
+    public BuildController(IConfiguration configuration)
+    {
+      Configuration = configuration;
+
+      if (client == null)
+      {
+        HttpClientHandler handler = new HttpClientHandler()
+        {
+          AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+        };
+        client = new HttpClient(handler);
+      }
+    }
     private async Task<Object> GetStatusFromUrl(string url)
     {
       var response = await client.GetAsync(url);
       response.EnsureSuccessStatusCode();
-      string responseBody = await response.Content.ReadAsStringAsync();
-      // Above three lines can be replaced with new helper method below
-      // string responseBody = await client.GetStringAsync(uri);
+      var responseBody = await response.Content.ReadAsStringAsync();
 
       var split = responseBody.Trim().Split('\n');
       var refString = split.First(f => f.Contains("REF="));
@@ -34,8 +46,11 @@ namespace BuildStatus.Controllers
     [HttpGet]
     public async Task<ActionResult> GetBuildStatusAsync()
     {
-      var staging = await GetStatusFromUrl("https://staging.va.gov/BUILD.txt");
-      var production = await GetStatusFromUrl("https://www.va.gov/BUILD.txt");
+      var stagingUrl = Configuration["STAGING_BUILD_URL"];
+      var prodUrl = Configuration["PROD_BUILD_URL"];
+
+      var staging = await GetStatusFromUrl(stagingUrl);
+      var production = await GetStatusFromUrl(prodUrl);
 
       return Ok(new { staging, production });
     }

@@ -15,39 +15,29 @@ namespace BuildStatus.Controllers
   {
     static readonly HttpClient client = new HttpClient();
 
-    private async Task<Object> GetCommitsFromRepo(string owner, string repo)
+    private async Task<Object> GetCommitsFromRepo(string owner, string repo, int perPage = 30)
     {
-      //   var response = await client.GetAsync($"https://api.github.com/repos/{owner}/{repo}/commits");
       client.DefaultRequestHeaders.Add("User-Agent", "Build-Status-Dashboard");
-      // client.DefaultRequestHeaders.Authorization.Parameter;
-      var response = await client.GetAsync($"https://api.github.com/repos/department-of-veterans-affairs/vets-website/commits");
-      //   response.EnsureSuccessStatusCode();
+      var url = $"https://api.github.com/repos/{owner}/{repo}/commits?per_page={perPage}";
+      // Console.WriteLine(url);
+      var response = await client.GetAsync(url);
       string jsonString = await response.Content.ReadAsStringAsync();
-      // Console.WriteLine(jsonString);
-      foreach (var header in response.Headers)
-      {
-        Console.WriteLine($"{header.Key} = {header.Value}");
-        foreach (var value in header.Value)
-        {
-          Console.WriteLine($"{value}");
-        }
-      }
-
-
+      // foreach (var header in response.Headers)
+      // {
+      //   // Console.WriteLine($"{header.Key} = {header.Value}");
+      //   foreach (var value in header.Value)
+      //   {
+      //     Console.WriteLine($"{value}");
+      //   }
+      // }
       var commits = JsonSerializer.Deserialize<List<Models.Root>>(jsonString);
-
-
-      //   var split = responseBody.Trim().Split('\n');
-      //   var refString = split.First(f => f.Contains("REF="));
-      //   var commit = refString.Split("=").Last();
-      //   var data = new { commit, staging = split, raw = responseBody, refString };
       return commits;
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetBuildStatusAsync()
+    public async Task<ActionResult> GetBuildStatusAsync([FromQuery] int perPage = 30)
     {
-      var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "vets-website");
+      var commits = await GetCommitsFromRepo("department-of-veterans-affairs", "vets-website", perPage);
       return Ok(new { commits });
     }
   }
