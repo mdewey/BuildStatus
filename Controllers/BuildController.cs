@@ -39,12 +39,12 @@ namespace BuildStatus.Controllers
       var split = responseBody.Trim().Split('\n');
       var refString = split.First(f => f.Contains("REF="));
       var commit = refString.Split("=").Last();
-      var data = new { commit, data = split, raw = responseBody, refString };
+      var data = new { url, commit, data = split, raw = responseBody, refString };
       return data;
     }
 
-    [HttpGet]
-    public async Task<ActionResult> GetBuildStatusAsync()
+    [HttpGet("website")]
+    public async Task<ActionResult> GetWebsiteBuildStatusAsync()
     {
       var stagingUrl = Configuration["STAGING_BUILD_URL"];
       var prodUrl = Configuration["PROD_BUILD_URL"];
@@ -54,5 +54,18 @@ namespace BuildStatus.Controllers
 
       return Ok(new { staging, production });
     }
+
+    [HttpGet("content")]
+    public async Task<ActionResult> GetContentBuildStatusAsync()
+    {
+      var stagingUrl = Configuration["CONTENT_STAGING_BUILD_URL"];
+      var prodUrl = Configuration["CONTENT_PROD_BUILD_URL"];
+
+      var staging = await GetStatusFromUrl(stagingUrl);
+      var production = await GetStatusFromUrl(prodUrl);
+
+      return Ok(new { staging, production });
+    }
+
   }
 }

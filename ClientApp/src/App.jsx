@@ -1,4 +1,4 @@
-import React, { Component, useReducer } from "react";
+import React, { useReducer } from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";

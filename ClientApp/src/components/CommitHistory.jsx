@@ -10,9 +10,9 @@ const CommitHistory = () => {
   let productionSha;
   let stagingSha;
 
-  if (state.statues){
-    productionSha = state.statues.production.commit
-    stagingSha = state.statues.staging.commit
+  if (state.statuses){
+    productionSha = state.statuses.production.commit
+    stagingSha = state.statuses.staging.commit
   }
   
   const [commits, setCommits] = useState([]);

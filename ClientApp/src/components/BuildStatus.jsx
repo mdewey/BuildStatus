@@ -3,43 +3,48 @@ import axios from "axios";
 import {buildStatusLoaded} from '../actions'
 import { useCommitContext } from "../useCommitContext";
 
-const BuildStatus = () => {
-  const { state, dispatch } = useCommitContext();
+const BuildStatus = (props) => {
+  const {projectKey} = props
+  const { dispatch } = useCommitContext();
   const [staging, setStaging] = useState({});
   const [production, setProduction] = useState({});
 
   useEffect(() => {
-    axios.get("/api/build").then((resp) => {
+    axios.get(`/api/build/${projectKey}`).then((resp) => {
       const { data } = resp;
       const { staging, production } = data;
       console.log({staging, production});
-      dispatch(buildStatusLoaded({staging, production}));
+      dispatch(buildStatusLoaded(projectKey, {staging, production}));
       setStaging(staging);
       setProduction(production);
     });
-  }, []);
-  const getTime = timeStamp => {
-    const {data} = timeStamp || {}
-    if (data){
-      const date = new Date(1000* data[7].replace('BUILDTIME=', ''));
+  }, [projectKey, dispatch]);
+
+  
+  const getTime = environment => {
+    if (environment){
+      const {data} = environment;
+      if (!data) return <>...</>;
+      const date = new Date(1000 * data[7].replace('BUILDTIME=', ''));
       return <>{date.toLocaleString()}</>
     }
     return <>...</>;
   }
+
   return (
     <>
       <h1 className="build-status">Build Status</h1>
       <div className="environments small-text">
         <div className="status">
-          <p className="name"><a target="_blank" href="https://staging.va.gov/BUILD.txt">staging</a></p>
+          <p className="name"><a target="_blank" rel="noopener noreferrer" href={staging.url}>staging</a></p>
           <p>{staging.commit} </p>
-          <p className="published-time">last updated at {getTime(state.statues?.staging)}</p>
+          <p className="published-time">last updated at {getTime(staging)}</p>
         </div>
         <div className="status">
-        <p className="name"><a target="_blank" href="https://va.gov/BUILD.txt">production</a></p>
+        <p className="name"><a target="_blank" rel="noopener noreferrer" href={production.url}>production</a></p>
 
           <p>{production.commit} </p>
-          <p className="published-time">last updated at {getTime(state.statues?.production)}</p>
+          <p className="published-time">last updated at {getTime(production)}</p>
         </div>
       </div>
     </>

@@ -16,6 +16,14 @@ code {
   color: #E01A76;
 }
 
+main {
+  display: flex;
+}
+
+main>section {
+  max-width: 50%;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -36,6 +44,7 @@ ul, li {
 .environments {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 .environments .status {

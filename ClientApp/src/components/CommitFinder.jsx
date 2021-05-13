@@ -4,7 +4,7 @@ import { useCommitContext } from "../useCommitContext";
 const CommitFinder = () => {
   const { state, dispatch } = useCommitContext();
   const [results, setResults] = useState();
-  const {commits, statues} = state
+  const {commits, statuses} = state
   const [productionIndex, setProductionIndex] = useState();
   const [stagingIndex, setStagingIndex] = useState();
   const [needle, setNeedle] = useState("");
@@ -20,9 +20,9 @@ const CommitFinder = () => {
 
   useEffect(() => {
     // find production index
-    if (commits && statues){
-      const production = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statues.production.commit)[0]
-      const staging = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statues.staging.commit)[0]
+    if (commits && statuses){
+      const production = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statuses.production.commit)[0]
+      const staging = commits.map((m, index) => ({sha : m.sha,index })).filter(f => f.sha === statuses.staging.commit)[0]
 
       if (production){
         setProductionIndex(production.index);
