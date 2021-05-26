@@ -5,7 +5,7 @@ const Commit = ({data, flags}) => {
   const {author, message} = commit
   const when = new Date(commit.author.date)
 
-  const userName = data.author.login
+  const userName = data.author?.login
   const isProductionCommit = flags.isProduction;
   const isStagingCommit = flags.isStaging;
   const getCSSClass = (flags) => {
